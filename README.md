@@ -10,6 +10,9 @@ Installation:
   hard-coded to use sudo and `/usr/local/bin/`.
 - Our `Test` script tweaks the above to do a sudo-free install to
   `~/.local/bin/`.
+- `devbox add` will, if Nix is not available, attept to install Nix 2.18
+  from `releases.nixos.org`, giving you a chance to abort first. This uses
+  `curl -L https://releases.nixos.org/nix/nix-2.18.1/install | sh -s`.
 
 General:
 - `devbox init` creates only a fresh `devbox.json` in the current working
@@ -22,12 +25,50 @@ General:
 Notes:
 - Set `DEVBOX_DEBUG=1` in the environment to get a verbose log of what
   `devbox` is doing, and any errors that result.
-- Devbox does not work with Nix 2.3.7 due to lack of the `--impure` flag.
+- Devbox does not work with:
+  - Nix 2.3.7 (Debian 11) due to lack of the `--impure` flag.
+  - Nix 2.8.0 (Debian 12), due to lack of `--priority` flag on
+    `nix profile install`
+  - Nix 2.18 seems to be the desired version; see above.
+  - 2.18 install fails on Debian 12; see below.
 
 Interesting points:
 - The `$PROJECT_DIR/.devbox/` directory is ignored without having to
   commit anything to get by creating a `.gitignore` _under_ that directory
   containing `*` and `.*`.
+
+
+Errors and Workarounds
+----------------------
+
+### Debian 12 Nix 2.18 Install Failure
+
+Fails with:
+
+    Installing nix with: curl -L https://releases.nixos.org/nix/nix-2.18.1/install | sh -s
+    This may require sudo access.
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100  4052  100  4052    0     0  32017      0 --:--:-- --:--:-- --:--:-- 31905
+    downloading Nix 2.18.1 binary tarball for x86_64-linux from 'https://releases.nixos.org/nix/nix-2.18.1/nix-2.18.1-x86_64-linux.tar.xz' to '/tmp/nix-binary-tarball-unpack.SqZ3zIE1Sv'...
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100 20.6M  100 20.6M    0     0  7362k      0  0:00:02  0:00:02 --:--:-- 7365k
+    Note: a multi-user installation is possible. See https://nixos.org/manual/nix/stable/installation/installing-binary.html#multi-user-installation
+    performing a single-user installation of Nix...
+    directory /nix does not exist; creating it by running 'mkdir -m 0755 /nix && chown cjs /nix' using sudo
+    copying Nix to /nix/store...
+
+    installing 'nix-2.18.1'
+    building '/nix/store/hzx954rnda4k348rb4wvqbdzp9z0ynjy-user-environment.drv'...
+    error: opening lock file '/nix/var/nix/profiles/per-user/cjs/profile.lock': No such file or directory
+    /tmp/nix-binary-tarball-unpack.SqZ3zIE1Sv/unpack/nix-2.18.1-x86_64-linux/install: unable to install Nix into your default profile
+    Error: exit status 1
+
+The problem may be that the `…/cjs/` directory above does not exist. But
+creating and re-running doesn't work because devbox appears to assume that
+Nix is already installed if the `/nix/` directory exists.
+
 
 
 
