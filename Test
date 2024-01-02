@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+die() {
+    local ecode="$1"; shift
+    echo 1>&2 "ERROR:" "$@"
+    exit $ecode
+}
+
+devbox version >/dev/null 2>&1 \
+    || curl -fsSL https://get.jetpack.io/devbox | bash
+devbox version >/dev/null || die 1 "Failed to run (install?) devbox."
+
+echo OK
