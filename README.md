@@ -3,11 +3,15 @@ devbox-play: Experiments with devbox/nix
 
 Working from the [source code README][gh].
 
-General:
+Installation:
 - The curl magic installs a `devbox` bootstrap binary in `/usr/local/bin/`;
   via `sudo`. This `devbox` second-stage bootstrap script can just as well
   go in `~/.local/bin/`, though the install script downloaded by curl is
   hard-coded to use sudo and `/usr/local/bin/`.
+- Our `Test` script tweaks the above to do a sudo-free install to
+  `~/.local/bin/`.
+
+General:
 - `devbox init` creates only a fresh `devbox.json` in the current working
   directory (even if it's not the root of the repo); this becomes the
   "project dir" found even if you subsequently run devbox commands below

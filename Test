@@ -1,14 +1,29 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+PASSED=false
+trap '
+    ecode=$?
+    $PASSED || die $ecode "FAILURE: unexpected return code $ecode"
+' 0
+
 die() {
     local ecode="$1"; shift
     echo 1>&2 "ERROR:" "$@"
     exit $ecode
 }
 
-devbox version >/dev/null 2>&1 \
-    || curl -fsSL https://get.jetpack.io/devbox | bash
+if ! devbox version >/dev/null 2>&1; then
+    curl -fsSL https://get.jetpack.io/devbox \
+        | sed -e '
+            # "De-sudo" this, installing instead to ~/.local/bin/.rg
+            /INSTALL_DIR=/s,"/usr/local/bin,~/".local/bin,
+            s/ (requires sudo)//
+            s/$(command -v sudo || true) //
+        ' \
+        | bash
+fi
 devbox version >/dev/null || die 1 "Failed to run (install?) devbox."
 
+PASSED=true
 echo OK
