@@ -21,8 +21,11 @@ General:
   directory (even if it's not the root of the repo); this becomes the
   "project dir" found even if you subsequently run devbox commands below
   that directory.
-- `devbox add asl@latest` will create `.devbox/` in the project dir;
-  this is ignored by git in a clever way (see below).
+- `devbox add asl@latest` will create `.devbox/` in the project dir; this
+  is ignored by git in a clever way (see below). It also updates
+  `devbox.json` to change `"packages": [],` to `"packages":
+  ["asl@latest"],`, and adds `devbox.lock` to add the details and Nix IDs
+  of the package. Also seems to create the `.devbox/` subdir
 
 Notes:
 - Set `DEVBOX_DEBUG=1` in the environment to get a verbose log of what

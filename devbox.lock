@@ -1,0 +1,25 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "asl@latest": {
+      "last_modified": "2023-12-13T22:54:10Z",
+      "resolved": "github:NixOS/nixpkgs/fd04bea4cbf76f86f244b9e2549fca066db8ddff#asl",
+      "source": "devbox-search",
+      "version": "142-bld232",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/5z9q3iyxbqam5skmjwxazrk2yla1rfzq-asl-142-bld232"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/i60hmvh217sgg8cwys4i4w4gyis2m3ly-asl-142-bld232"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/rwj2xii4vrs1mqjgzy307xwaavsx7jjx-asl-142-bld232"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/zxsisicw2fwr42iha1s76qn2c9ixx86z-asl-142-bld232"
+        }
+      }
+    }
+  }
+}
