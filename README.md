@@ -43,7 +43,8 @@ Errors and Workarounds
 
 ### Debian 12 Nix 2.18 Install Failure
 
-Fails with:
+`devbox add asl@latest` without a `/nix/` directory makes Devbox attempt
+to install nix (per above), which fails with:
 
     Installing nix with: curl -L https://releases.nixos.org/nix/nix-2.18.1/install | sh -s
     This may require sudo access.
