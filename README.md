@@ -50,10 +50,13 @@ Common commands:
 - `devbox info PKG`: Shows version and other info, including special
   Devbox handling of e.g. Python.
 - `devbox shell`: Start a subshell with the devbox environment for the
-  project found from the CWD. Use `refresh` within the shell to do some
-  sort of environment update (but does not re-run `init_hook` or package
-  hooks).
-- `devbox shellenv`: ???
+  project found from the CWD. Has the usual massive slew of long
+  `/nix/store/…` paths at the front of $PATH. Use `refresh` within the
+  shell to do some sort of environment update (but does not re-run
+  `init_hook` or package hooks).
+- `devbox shellenv`: Prints `export` commands to update the environment for
+  the Nix profile and all its various packages, adds a `refresh`
+  alias to re-run the update, and executes `hash -r`.
 - `devbox run`: Run a single command in the project environment.
 
 Notes:
