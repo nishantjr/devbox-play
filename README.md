@@ -41,8 +41,8 @@ General:
   - To automatically activate, ; add `source $VENV_DIR/bin/activate` to the
     `init_hook` of `devbox.json`. (You can also set $VENV_DIR there.)
   - This info can be shown with `devbox info python`.
-  - BORKEN: Devbox (Nix?) Python packages supply `python`, but not
-    `python3`, which then falls back to the system `python3`.
+  - Various things can cause system Python stuff to leak into the devbox
+    environment if you're not using a Python venv.
 
 Common commands:
 - `devbox install PKG[@VER]`
