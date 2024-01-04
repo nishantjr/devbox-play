@@ -66,11 +66,19 @@ to install nix (per above), which fails with:
     /tmp/nix-binary-tarball-unpack.SqZ3zIE1Sv/unpack/nix-2.18.1-x86_64-linux/install: unable to install Nix into your default profile
     Error: exit status 1
 
-The problem may be that the `…/cjs/` directory above does not exist. But
-creating and re-running doesn't work because devbox appears to assume that
-Nix is already installed if the `/nix/` directory exists.
+The problem may be that the `…/cjs/` directory above does not exist. It
+can be created with
 
+    mkdir /nix/var/nix/profiles/per-user/cjs
 
+However, re-running Devbox at this point won't work because it thinks that
+Nix is installed but it is not. So you must manuall re-run the Nix install:
+
+    curl -L https://releases.nixos.org/nix/nix-2.18.1/install | sh -s
+
+But the actual problem turns out to be `~/.nix-*` files/dirs left behind
+from a previous Nix install, `rm -rf ~/.nix-*` fixes the install to
+work the first time.
 
 
 <!-------------------------------------------------------------------->
