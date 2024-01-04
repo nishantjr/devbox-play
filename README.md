@@ -10,8 +10,10 @@ Installation:
   hard-coded to use sudo and `/usr/local/bin/`.
 - Our `Test` script tweaks the above to do a sudo-free install to
   `~/.local/bin/`.
-- `devbox add` will, if Nix is not available, attept to install Nix 2.18
-  from `releases.nixos.org`, giving you a chance to abort first. This uses
+- `devbox add` will, if `/nix/` does not exist, use `sudo` to create the `/nix/`
+  directory and change ownership to the current user (probably), and then
+  attept to a single-user install of Nix 2.18 from `releases.nixos.org`,
+  giving you a chance to abort first. This uses
   `curl -L https://releases.nixos.org/nix/nix-2.18.1/install | sh -s`.
 
 General:
