@@ -82,6 +82,22 @@ But the actual problem turns out to be `~/.nix-*` files/dirs left behind
 from a previous Nix install, `rm -rf ~/.nix-*` fixes the install to
 work the first time.
 
+However, after that it comes up with:
+
+    Nix installed successfully. Devbox is ready to use!
+    Error: exec: "nix": executable file not found in $PATH
+
+Maybe it's not re-running whatever extra `.bash_profile` stuff that the
+Nix install added? I.e., this (line split for clarity):
+
+    if [ -e /home/cjs/.nix-profile/etc/profile.d/nix.sh ]; then
+      . /home/cjs/.nix-profile/etc/profile.d/nix.sh;
+    fi # added by Nix installer
+
+Note that this does nothing unless both `$HOME` and `$USER` are set in
+the environment. The `dent` container I'm using for some reason doesn't
+have `$USER` set. This needs investigation.
+
 
 <!-------------------------------------------------------------------->
 [gh]: https://github.com/jetpack-io/devbox?tab=readme-ov-file#quickstart-fast-deterministic-shell
