@@ -3,6 +3,10 @@ devbox-play: Experiments with devbox/nix
 
 Working from the [source code README][gh].
 
+__WARNING:__ After `devbox add …` you should exit and restart any `devbox
+shell` instances so that they get the new configuration/plugins specific to
+the package.
+
 Installation:
 - The curl magic installs a `devbox` bootstrap binary in `/usr/local/bin/`;
   via `sudo`. This `devbox` second-stage bootstrap script can just as well
@@ -26,6 +30,24 @@ General:
   `devbox.json` to change `"packages": [],` to `"packages":
   ["asl@latest"],`, and adds `devbox.lock` to add the details and Nix IDs
   of the package. Also seems to create the `.devbox/` subdir
+- When using a Devbox-installed Python, there is special support to
+  use a project-local create a `venv` virtual environment (in $VENV_DIR, default
+  `.devbox/virtenv/python/.venv`) for the project. This is not
+  automatically activated.
+  - The automatic creation happens not when you `devbox add python` but
+    only after you exit and `devbox shell` again. That runs the helper
+    file `.devbox/virtenv/python/bin/venvShellHook.sh` which creates it
+    in $VENV_DIR. (This cannot be run stand-alone.)
+  - To automatically activate, ; add `source $VENV_DIR/bin/activate` to the
+    `init_hook` of `devbox.json`. (You can also set $VENV_DIR there.)
+  - This info can be shown with `devbox info python`.
+  - BORKEN: Devbox (Nix?) Python packages supply `python`, but not
+    `python3`, which then falls back to the system `python3`.
+
+Common commands:
+- `devbox install PKG[@VER]`
+- `devbox info PKG`: shows version and other info, including special
+  Devbox handling of e.g. Python.
 
 Notes:
 - Set `DEVBOX_DEBUG=1` in the environment to get a verbose log of what

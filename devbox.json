@@ -1,5 +1,8 @@
 {
-  "packages": ["asl@latest"],
+  "packages": [
+    "asl@latest",
+    "python@3.9"
+  ],
   "shell": {
     "init_hook": [
       "echo 'Welcome to devbox!' > /dev/null"

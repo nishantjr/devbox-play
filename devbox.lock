@@ -20,6 +20,27 @@
           "store_path": "/nix/store/zxsisicw2fwr42iha1s76qn2c9ixx86z-asl-142-bld232"
         }
       }
+    },
+    "python@3.9": {
+      "last_modified": "2023-12-13T22:54:10Z",
+      "plugin_version": "0.0.3",
+      "resolved": "github:NixOS/nixpkgs/fd04bea4cbf76f86f244b9e2549fca066db8ddff#python39",
+      "source": "devbox-search",
+      "version": "3.9.18",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/bcfckrsachqca4kgsvhvw8y9dw9cfm6v-python3-3.9.18"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/i4m5bw5py2nnw0ghn260xhgymgw3ynf4-python3-3.9.18"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/0kk7r00nl5rv6dyi19yjwgk1s1knrgh0-python3-3.9.18"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/s8f7vcj0wc94vf12k6smlb7igbq9xmvl-python3-3.9.18"
+        }
+      }
     }
   }
 }
