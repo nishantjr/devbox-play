@@ -5,7 +5,8 @@ Working from the [source code README][gh].
 
 __WARNING:__ After `devbox add …` you should exit and restart any `devbox
 shell` instances so that they get the new configuration/plugins specific to
-the package.
+the package. (`refresh` in the shell will not work (we guess) because it
+refreshes only env vars, it does not re-run package hooks or `init_hook`.)
 
 Installation:
 - The curl magic installs a `devbox` bootstrap binary in `/usr/local/bin/`;
@@ -46,8 +47,14 @@ General:
 
 Common commands:
 - `devbox install PKG[@VER]`
-- `devbox info PKG`: shows version and other info, including special
+- `devbox info PKG`: Shows version and other info, including special
   Devbox handling of e.g. Python.
+- `devbox shell`: Start a subshell with the devbox environment for the
+  project found from the CWD. Use `refresh` within the shell to do some
+  sort of environment update (but does not re-run `init_hook` or package
+  hooks).
+- `devbox shellenv`: ???
+- `devbox run`: Run a single command in the project environment.
 
 Notes:
 - Set `DEVBOX_DEBUG=1` in the environment to get a verbose log of what
