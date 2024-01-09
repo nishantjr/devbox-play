@@ -58,6 +58,7 @@ Common commands:
   the Nix profile and all its various packages, adds a `refresh`
   alias to re-run the update, and executes `hash -r`.
 - `devbox run`: Run a single command in the project environment.
+- `devbox setup nix`: ???
 
 Notes:
 - Set `DEVBOX_DEBUG=1` in the environment to get a verbose log of what
